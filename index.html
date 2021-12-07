@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <link rel="stylesheet" href="extra.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" >
+  <meta charset="UTF-8">
+  <meta name="author" content="interstellar code">
+  <meta name='description' content="Notehandy is a beautiful app that will help you write cool 😎 notes and format them beautifully using a stylus and your phone or tablet only">
+  <meta property="og:image" content="./raipicinvent.png">
+  <meta property="og:description" content="Notehandy is a beautiful app that will help you write cool 😎 notes and format them beautifully using a stylus/finger and your phone or tablet only it includes a handwriting recogntion api by google and awesome text styling">
+  <meta property="og:title" content="Notehandy">
+  
+  <meta property="twitter:image" content="./log.png">
+  <meta property="twitter:title" content="Notehandy ">
+  
+  <meta property="twitter:image:alt" content="logo">
+  <meta property="twitter:creator" content="@interstellarcg ">
+  
+  <meta property="twitter:description" content="Notehandy is a beautiful app that will help you write cool 😎 notes and format them beautifully using a stylus/finger and your phone or tablet only it includes a handwriting recogntion api by google and awesome text styling">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Notehandy</title>
+  <script type="text/javascript" src="./handwriting.canvas.js"  ></script>
+</head>
+<body>
+  <div class="top-view">
+    <div class=""></div>
+  <nav>
+    <div class="dots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <ul>
+      <li class='active_li_blank'><a href="#"> 
+      <i class="fa fa-plus-square"></i>
+      New</a></li>
+      <li><a href="modify_note.html">  
+      <i class="fa fa-pen-square"></i>
+      Modify
+      </a></li>
+      <li><a href="notes_view.html"> 
+      <i class="fa fa-sticky-note"></i>My Notes</a></li>
+      <li><a href="abt.html"> 
+      <i class="fa fa-question-circle"></i>About</a></li>
+      
+      <li><a href="abt.html"> 
+      <i class="fa fa-cog"></i>Settings</a></li>
+    </ul>
+  </nav>
+      <button onclick="postNote()" class="save">
+       <i class="fa fa-save"></i> Save
+      </button>
+  
+  </div>
+  <main>
+    <div class="wrapper">
+      <div class="message">
+        
+      </div>
+    <label for="fontSize" >fontSize</label><input id ="fontSize"type="range" min="0"  max ='100' value="15"/>
+    </div>
+    <br/>
+    <div class="view">
+      <div class="top">
+       <input name="title" type='text'placeholder="Your Title Here" id="note_title"/>
+       <input type='text' name="category"  id="note_category" placeholder="Note Category" />
+       </div>
+       <br/>
+    <div class="out"onselect="alertSelection()" contenteditable="true" aria-autocomplete="off" autocomplete="off">
+
+      
+    </div>
+    </div>
+    <div class="mod_buttons">
+      <div class="fonty flex">
+      <button class="execs"  onclick="execChangeFont()">
+          <i class="fa fa-font"></i>   
+          </button><select name="font" id="font-select" class="font-select">
+            <option value="cursive">cursive</option>
+            <option value="sans-serif">Sans serif</option>
+            <option value="monospace">Monospace</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="serif">Serif</option>
+            
+          </select>
+          </div>
+      <div class="colors flex">
+      <button class="execs" onclick="execChangeColor()">
+         <i class="fa fa-tint"></i> 
+         </button>
+         <select name="color-select" id="color-select">
+           <option value="red">Red</option>
+           <option value="tomato">tomato</option>
+           <option value="chartreuse">chartreuse</option>
+           <option value="green">green</option>
+           <option value="yellow">Yellow</option>
+           <option value="aqua">aqua</option>
+           <option value="blue">Blue</option>
+           <option value="purple">Purple</option>
+         </select>
+         </div>
+    <div class="backg flex"> 
+    <button class="execs"  onclick="setBackgroundColor()"> 
+    <i class="fa fa-fill"></i>
+    </button>
+      <select name="bgcolor-select" id="bgcolor-select">
+        <option value="red">Red</option>
+        <option value="tomato">tomato</option>
+        <option value="chartreuse">chartreuse</option>
+        <option value="green">green</option>
+        <option value="yellow">Yellow</option>
+        <option value="aqua">aqua</option>
+        <option value="blue">Blue</option>
+        <option value="purple">Purple</option>
+      </select>
+    </div>
+      <button class="execs "onclick="boldenText()"> <i class="fa fa-bold"></i> </button>
+     
+      <button class="execs "onclick="Italicize()"> <i class="fa fa-italic"></i> </button>
+      <div class="flex">
+      <button class="execs "onclick="IncFont()"> <i class='fa fa-font'></i> </button>
+           <select name="" id="" class="fontval">
+             <option value="1">1</option>
+             <option value="2">2</option>
+             <option value="3">3</option>
+             <option value="4">4</option>
+             <option value="5">5</option>
+             <option value="6">6</option>
+             <option value="7">7</option>
+           </select>
+      </div>
+      <div class="flex">
+      <button class="execs "onclick="execHeading()"> <i class="fa fa-heading"></i> </button>
+      <select name="headingval"class="headingval">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+      </select>
+      </div>
+      
+      <button class="execs "onclick="Underline()"> <i class="fa fa-underline"></i> </button>
+    </div>
+    <div class="out_textarea">
+           <button onclick="postNote()" class="save">
+       <i class="fa fa-save"></i> Save
+      </button>
+    </div>
+  
+  
+    <div>
+         <div class="buttons">
+             <div class="size">
+               Pen Size<input value=2 type="range" id='pen_size' min=0, max=100></div>
+           
+        <button value="append" onclick="recog()">Recognize</button>
+
+      
+        <button onclick="clearit()">Clear</button>
+        <button onclick="redo()">Redo</button>
+        <button onclick="undo()">undo</button>
+      </div>
+    <canvas class='canva' id="can"  width="1000"  height="800"style=" cursor: crosshair;"></canvas>
+
+   
+    </div>
+  </main>
+      
+
+
+<script src="index.js">
+
+</script>
+
+</body>
+</html>
